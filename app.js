@@ -4,8 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var config = require('./routes/config')
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var redirectRouter = require('./routes/redirect');
+var apiRouter = require('./routes/api');
 
 var app = express();
 
@@ -20,7 +22,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/redirect', redirectRouter);
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -37,5 +40,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+const port = config.port;
+app.listen(port,() => console.log(`Server started on ${port}`))
 
 module.exports = app;

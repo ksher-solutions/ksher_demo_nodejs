@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('./partials/head'); %>
+</head>
+<header>
+  <%- include('./partials/nav'); %>
+</header>
+
+<body class="p-3 m-0 border-0 bd-example m-0 border-0">
+
+  <h1>example call By Postman</h1>
+  <p> call by Postman by use following</p>
+  <p>Url: http://127.0.0.1:3000/api/gateway_pay</p>
+  
+  <p>Body: 
+      {   "mch_order_no": "20230608165300",
+      "total_fee": "100",
+      "fee_type": "THB",
+      "mch_code": "20230608165300",
+      "refer_url": "https://6ffe-171-103-29-30.ngrok-free.app",
+      "mch_redirect_url":"https://6ffe-171-103-29-30.ngrok-free.app/api/gateway_pay/success",
+      "mch_redirect_url_fail":"https://6ffe-171-103-29-30.ngrok-free.app/api/gateway_pay/fail",
+      "mch_notify_url":"https://6ffe-171-103-29-30.ngrok-free.app/api/gateway_pay/notify_url/",
+      "product_name":"Example Product",
+      "channel_list":"card,promptpay,linepay,airpay,truemoney,atome,ktc_instal,kbank_instal,kcc_instal,kfc_instal,scb_easy,bbl_deeplink,baybank_deeplink,kplus,alipay,wechat,card,ktc_instal,kbank_instal,kcc_instal,kfc_instal"
+  }
+  </p>
+
+</body>
+
+</html>
