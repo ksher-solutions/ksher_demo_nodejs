@@ -7,6 +7,8 @@ Another SDK please check at
 
 Java: https://github.com/ksher-api/ksher-sdk/tree/master/java
 
+[![Version](https://img.shields.io/pypi/v/ksher)](https://pypi.org/project/ksher/)
+
 Python: https://github.com/ksher-solutions/ksher_sdk_python
 
 Go: https://github.com/ksher-api/ksher-sdk/tree/master/go
@@ -61,7 +63,7 @@ const port = 3000; // port use to run demo
 ```shell
  nodemon start
 ```
-and entry url "http://127.0.0.1:3000"
+and entry url `http://127.0.0.1:3000`
 
 ## Example call by API
 - after run server you can call API by
@@ -100,7 +102,17 @@ curl --location 'http://127.0.0.1:3000/api/gateway_pay' \
 for more API please check at Ksher API document https://api.ksher.net
 example express will call `ksher_sdk_nodejs`
 
-## Example website
-create order
-fill all of information
-page will redirect to payment page
+## Example Website
+goto `http://localhost:3000/redirect`
+- create order by filling information
+- page will redirect to payment page
+
+## Example C Scan B
+goto `http://localhost:3000/cscanb`
+- create order by filling information
+- page will display QR code
+
+## Example B scan C
+goto `http://localhost:3000/bscanc`
+- create order by filling information
+- it will display response information

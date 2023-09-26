@@ -9,6 +9,7 @@ var indexRouter = require('./routes/index');
 var apiRouter = require('./routes/api');
 var redirectRouter = require('./routes/redirect');
 var cscanbRouter = require('./routes/cscanb');
+var bscancRouter = require('./routes/bscanc');
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.use('/', indexRouter);
 app.use('/api', apiRouter);
 app.use('/redirect', redirectRouter);
 app.use('/cscanb', cscanbRouter);
+app.use('/bscanc', bscancRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
