@@ -9,8 +9,112 @@
 </header>
 
 <body class="p-3 m-0 border-0 bd-example m-0 border-0">
-
-  <h1>Ksher Example SDK nodejs</h1>
+  <h1 id="ksher-example-sdk-nodejs">ksher example sdk nodejs</h1>
+  <p>This project is Example for NodeJs. API Document Please check document at <a
+      href="http://api.ksher.net">http://api.ksher.net</a></p>
+  <p>Another SDK please check at</p>
+  <p>Java: <a
+      href="https://github.com/ksher-api/ksher-sdk/tree/master/java">https://github.com/ksher-api/ksher-sdk/tree/master/java</a>
+  </p>
+  <p>Python: <a
+      href="https://github.com/ksher-solutions/ksher_sdk_python">https://github.com/ksher-solutions/ksher_sdk_python</a>
+  </p>
+  <p>Go: <a
+      href="https://github.com/ksher-api/ksher-sdk/tree/master/go">https://github.com/ksher-api/ksher-sdk/tree/master/go</a>
+  </p>
+  <p>PHP: <a
+      href="https://github.com/ksher-api/ksher-sdk/tree/master/php">https://github.com/ksher-api/ksher-sdk/tree/master/php</a>
+  </p>
+  <p>Netcore: <a
+      href="https://github.com/ksher-api/ksher-sdk/tree/master/netcore">https://github.com/ksher-api/ksher-sdk/tree/master/netcore</a>
+  </p>
+  <p><a href="https://www.npmjs.com/package/@kshersolution/ksher"><img
+        src="https://img.shields.io/npm/v/@kshersolution/ksher" alt="Version"></a></p>
+  <p>NodeJs: <a
+      href="https://github.com/ksher-solutions/ksher_sdk_nodejs">https://github.com/ksher-solutions/ksher_sdk_nodejs</a>
+  </p>
+  <h2 id="how-to-install-example">How to install Example</h2>
+  <ul>
+    <li>Install nodejs on you computer. Check your nodejs working with your computer by using</li>
+  </ul>
+  <pre><code class="language-shell">node -v
+</code></pre>
+  <ul>
+    <li>Clone project from</li>
+  </ul>
+  <pre><code class="language-shell">git clone https://github.com/ksher-solutions/ksher_demo_nodejs.git
+</code></pre>
+  <ul>
+    <li>Enter project and install package</li>
+  </ul>
+  <pre><code class="language-shell"> cd ./ksher_demo_nodejs
+ npm install
+</code></pre>
+  <h3 id="how-to-install-ksher-sdk-nodejs">How to install ksher sdk nodejs</h3>
+  <ul>
+    <li>Install <code>ksher_sdk_nodejs</code> by</li>
+  </ul>
+  <pre><code class="language-shell">npm install @kshersolution/ksher
+</code></pre>
+  <ul>
+    <li>in case you want to use by local path. clone from</li>
+  </ul>
+  <pre><code class="language-shell">git clone https://github.com/ksher-solutions/ksher_sdk_nodejs
+sudo npm link ./ksher_sdk_nodejs
+</code></pre>
+  <h2 id="setup-your-config">setup your config</h2>
+  <ul>
+    <li>goto <code>./ksher_demo_nodejs/routes/config.js</code> and edit file <code>config.js</code></li>
+  </ul>
+  <pre><code class="language-js"><span class="hljs-keyword">const</span> appid =<span class="hljs-string">&quot;mch35000&quot;</span>; <span class="hljs-comment">// your appid</span>
+<span class="hljs-keyword">const</span> privatekey = <span class="hljs-string">&quot;/Users/xxxxx/repo/ksher_demo_nodejs/Mch35000_PrivateKey.pem&quot;</span>; <span class="hljs-comment">// privatekey path</span>
+<span class="hljs-keyword">const</span> port = <span class="hljs-number">3000</span>; <span class="hljs-comment">// port use to run demo</span>
+</code></pre>
+  <h2 id="run-example">run example</h2>
+  <pre><code class="language-shell"> nodemon start
+</code></pre>
+  <p>and entry url &quot;<a href="http://127.0.0.1:3000">http://127.0.0.1:3000</a>&quot;</p>
+  <h2 id="example-call-by-api">Example call by API</h2>
+  <ul>
+    <li>after run server you can call API by</li>
+  </ul>
+  <pre><code class="language-shell">curl --location &#x27;http://127.0.0.1:3000/api/gateway_pay&#x27; \
+--header &#x27;Content-Type: application/json&#x27; \
+--data &#x27;{
+    &quot;fee_type&quot;: &quot;THB&quot;,
+        &quot;lang&quot;: &quot;en&quot;,
+        &quot;channel_list&quot;: &quot;promptpay&quot;,
+        &quot;product_name&quot;: &quot;example product&quot;,
+        &quot;refer_url&quot;: &quot;http://www.google.com&quot;,
+        &quot;mch_notify_url&quot;: &quot;https://yourexample.ngrok-free.app/api/gateway_pay/notify_url/&quot;,
+        &quot;mch_order_no&quot;: &quot;1695700117&quot;,
+        &quot;total_fee&quot;: 100,
+        &quot;mch_code&quot;: &quot;1695700117&quot;,
+        &quot;mch_redirect_url&quot;: &quot;https://yourexample.ngrok-free.app/api/gateway_pay/success/&quot;,
+        &quot;mch_redirect_url_fail&quot;: &quot;https://yourexample.ngrok-free.app/api/gateway_pay/fail/&quot;,
+        &quot;attach&quot;: &quot;1695700117&quot;
+}&#x27;
+</code></pre>
+  <ul>
+    <li>it will response link to paid like</li>
+  </ul>
+  <pre><code class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;pay_content&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://gateway.ksher.com/page?order_uuid=49ba030e7e1711ea97e652540075451d&quot;</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;lang&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;message&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;SUCCESS&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;msg&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;SUCCESS&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;sign&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;6608b289c41550669d34236fd878045a5f95ad4a67b40988c4892ff71972ce2d809f453284b81c2c64dea5fbee826e6e81bf67a1644439a7e7917e555fbf8a9e&quot;</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+  <p>for more API please check at Ksher API document <a href="https://api.ksher.net">https://api.ksher.net</a>
+    example express will call <code>ksher_sdk_nodejs</code></p>
+  <h2 id="example-website">Example website</h2>
+  <p>create order
+    fill all of information
+    page will redirect to payment page</p>
 
 </body>
 

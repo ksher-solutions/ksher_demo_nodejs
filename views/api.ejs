@@ -9,25 +9,43 @@
 </header>
 
 <body class="p-3 m-0 border-0 bd-example m-0 border-0">
-
-  <h1>example call By Postman</h1>
-  <p> call by Postman by use following</p>
-  <p>Url: http://127.0.0.1:3000/api/gateway_pay</p>
-  
-  <p>Body: 
-      {   "mch_order_no": "20230608165300",
-      "total_fee": "100",
-      "fee_type": "THB",
-      "mch_code": "20230608165300",
-      "refer_url": "https://6ffe-171-103-29-30.ngrok-free.app",
-      "mch_redirect_url":"https://6ffe-171-103-29-30.ngrok-free.app/api/gateway_pay/success",
-      "mch_redirect_url_fail":"https://6ffe-171-103-29-30.ngrok-free.app/api/gateway_pay/fail",
-      "mch_notify_url":"https://6ffe-171-103-29-30.ngrok-free.app/api/gateway_pay/notify_url/",
-      "product_name":"Example Product",
-      "channel_list":"card,promptpay,linepay,airpay,truemoney,atome,ktc_instal,kbank_instal,kcc_instal,kfc_instal,scb_easy,bbl_deeplink,baybank_deeplink,kplus,alipay,wechat,card,ktc_instal,kbank_instal,kcc_instal,kfc_instal"
-  }
-  </p>
-
+  <h2 id="example-call-by-api">Example call by API</h2>
+  <ul>
+    <li>after run server you can call API by</li>
+  </ul>
+  <pre><code class="language-shell">curl --location &#x27;http://127.0.0.1:3000/api/gateway_pay&#x27; \
+--header &#x27;Content-Type: application/json&#x27; \
+--data &#x27;{
+    &quot;fee_type&quot;: &quot;THB&quot;,
+        &quot;lang&quot;: &quot;en&quot;,
+        &quot;channel_list&quot;: &quot;promptpay&quot;,
+        &quot;product_name&quot;: &quot;example product&quot;,
+        &quot;refer_url&quot;: &quot;http://www.google.com&quot;,
+        &quot;mch_notify_url&quot;: &quot;https://yourexample.ngrok-free.app/api/gateway_pay/notify_url/&quot;,
+        &quot;mch_order_no&quot;: &quot;1695700117&quot;,
+        &quot;total_fee&quot;: 100,
+        &quot;mch_code&quot;: &quot;1695700117&quot;,
+        &quot;mch_redirect_url&quot;: &quot;https://yourexample.ngrok-free.app/api/gateway_pay/success/&quot;,
+        &quot;mch_redirect_url_fail&quot;: &quot;https://yourexample.ngrok-free.app/api/gateway_pay/fail/&quot;,
+        &quot;attach&quot;: &quot;1695700117&quot;
+}&#x27;
+</code></pre>
+  <ul>
+    <li>it will response link to paid like</li>
+  </ul>
+  <pre><code class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;pay_content&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://gateway.ksher.com/page?order_uuid=49ba030e7e1711ea97e652540075451d&quot;</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;lang&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;message&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;SUCCESS&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;msg&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;SUCCESS&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;sign&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;6608b289c41550669d34236fd878045a5f95ad4a67b40988c4892ff71972ce2d809f453284b81c2c64dea5fbee826e6e81bf67a1644439a7e7917e555fbf8a9e&quot;</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+  <p>for more API please check at Ksher API document <a href="https://api.ksher.net">https://api.ksher.net</a>
+    example express will call <code>ksher_sdk_nodejs</code></p>
 </body>
 
 </html>

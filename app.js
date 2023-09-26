@@ -6,8 +6,9 @@ var logger = require('morgan');
 
 var config = require('./routes/config')
 var indexRouter = require('./routes/index');
-var redirectRouter = require('./routes/redirect');
 var apiRouter = require('./routes/api');
+var redirectRouter = require('./routes/redirect');
+var cscanbRouter = require('./routes/cscanb');
 
 var app = express();
 
@@ -22,8 +23,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/redirect', redirectRouter);
 app.use('/api', apiRouter);
+app.use('/redirect', redirectRouter);
+app.use('/cscanb', cscanbRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -8,42 +8,38 @@ const sdk = new KsherPay(config.appid, config.privatekey);
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("redirect", { title: "Example use for Website" });
-});
-
-router.get("/success_page", function (req, res) {
-  var mch_order_no = req.query.mch_order_no
-  res.render("success_page", { title: "Ksher", mch_order_no:mch_order_no});
-});
-
-router.get("/fail_page", function (req, res) {
-  var mch_order_no = req.query.mch_order_no
-  res.render("fail_page", { title: "Ksher", mch_order_no:mch_order_no});
+  res.render("cscanb", { title: "Example use for Website" });
 });
 
 router.all("/create", async function (req, res, next) {
-  var channel_list = req.body.channel_list.join();
   const requestBody = {
     total_fee: req.body.total_fee,
     fee_type: req.body.fee_type,
     mch_order_no: req.body.mch_order_no,
-    product_name: req.body.product_name,
-    channel_list: channel_list,
-    mch_code: req.body.mch_code,
-    mch_redirect_url: req.body.mch_redirect_url,
-    mch_redirect_url_fail: req.body.mch_redirect_url_fail,
-    mch_notify_url: req.body.mch_notify_url,
-    refer_url: req.body.refer_url,
+    channel: req.body.channel,
+    product: req.body.product,
+    device_id: req.body.device_id,
+    notify_url: req.body.notify_url,
     attach: req.body.attach,
   };
   console.log("requestBody: ", requestBody);
   try {
-    await sdk.gateway_pay(requestBody).then((response) => {
+    await sdk.native_pay(requestBody).then((response) => {
       console.log("--------------------");
       console.log("body: ", response);
-      var url = response.data.pay_content;
-      console.log("url: ", url);
-      res.redirect(url);
+      var imgdat = response.data.imgdat;
+      if (imgdat != null) {
+        var base64Data = imgdat.replace(/^data:image\/png;base64,/, "");
+        var img = Buffer.from(base64Data, "base64");
+
+        res.writeHead(200, {
+          "Content-Type": "image/png",
+          "Content-Length": img.length,
+        });
+        res.end(img);
+      } else {
+        res.send(response);
+      }
     });
   } catch (error) {
     return next(error);
@@ -56,7 +52,7 @@ router.all("/query", async function (req, res, next) {
   };
   console.log("requestBody: ", requestBody);
   try {
-    await sdk.gateway_order_query(requestBody).then((response) => {
+    await sdk.order_query(requestBody).then((response) => {
       console.log("--------------------");
       console.log("body: ", response);
       res.send(response);
@@ -72,7 +68,7 @@ router.all("/refund", async function (req, res, next) {
   };
   console.log("requestBody: ", requestBody_query);
   try {
-    var response_query = await sdk.gateway_order_query(requestBody_query);
+    var response_query = await sdk.order_query(requestBody_query);
     var ksher_order_refund = response_query.data.ksher_order_no;
     if (response_query.data.result == "REFUND") {
       // remove this if use partial refund
