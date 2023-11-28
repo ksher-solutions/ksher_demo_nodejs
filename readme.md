@@ -3,6 +3,8 @@
 
 This project is Example for NodeJs. API Document Please check document at http://api.ksher.net
 
+You can check [npm SDK NodeJs](https://www.npmjs.com/package/@kshersolution/ksher) or visit [Github ksher_sdk_nodejs repo](https://github.com/ksher-solutions/ksher_sdk_nodejs)
+
 Another SDK please check at
 
 Java: https://github.com/ksher-api/ksher-sdk/tree/master/java
