@@ -73,7 +73,7 @@ router.all("/refund", async function (req, res, next) {
   console.log("requestBody: ", requestBody_query);
   try {
     var response_query = await sdk.gateway_order_query(requestBody_query);
-    var ksher_order_refund = response_query.data.ksher_order_no;
+    // var ksher_order_no = response_query.data.ksher_order_no;
     if (response_query.data.result == "REFUND") {
       // remove this if use partial refund
       res.send("order have been refund!");
@@ -82,7 +82,7 @@ router.all("/refund", async function (req, res, next) {
       res.send("order don't paid, please make sure order have paid");
     }
     const requestBody_refund = {
-      ksher_order_no: ksher_order_refund,
+      mch_order_no: req.body.mch_order_no,
       mch_refund_no: req.body.mch_refund_no,
       total_fee: req.body.total_fee,
       fee_type: req.body.fee_type,
