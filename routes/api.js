@@ -239,4 +239,43 @@ router.all('/jsapi_pay', async function(req, res) {
     
 });
 
+router.post('/app_pay', async function(req, res) {
+
+  const body = req.body;
+  console.log("body: ",body);
+  
+  await sdk.app_pay(body)
+    .then(response => {
+      console.log("body: ",response);
+      res.send(response);
+    });
+    
+});
+
+router.post('/mini_program_pay', async function(req, res) {
+
+  const body = req.body;
+  console.log("body: ",body);
+  
+  await sdk.mini_program_pay(body)
+    .then(response => {
+      console.log("body: ",response);
+      res.send(response);
+    });
+    
+});
+
+router.post('/wap_pay', async function(req, res) {
+
+  const body = req.body;
+  console.log("body: ",body);
+  
+  await sdk.wap_pay(body)
+    .then(response => {
+      console.log("body: ",response);
+      res.send(response);
+    });
+    
+});
+
 module.exports = router;

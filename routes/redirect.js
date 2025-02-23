@@ -67,40 +67,77 @@ router.all("/query", async function (req, res, next) {
 });
 
 router.all("/refund", async function (req, res, next) {
-  const requestBody_query = {
-    mch_order_no: req.body.mch_order_no,
-  };
-  console.log("requestBody: ", requestBody_query);
-  try {
-    var response_query = await sdk.gateway_order_query(requestBody_query);
-    // var ksher_order_no = response_query.data.ksher_order_no;
-    if (response_query.data.result == "REFUND") {
-      // remove this if use partial refund
-      res.send("order have been refund!");
-    }
-    if (response_query.data.result != "SUCCESS") {
-      res.send("order don't paid, please make sure order have paid");
-    }
-    const requestBody_refund = {
+  if (req.body.mch_order_no != ""){
+    const requestBody_query = {
       mch_order_no: req.body.mch_order_no,
-      mch_refund_no: req.body.mch_refund_no,
-      total_fee: req.body.total_fee,
-      fee_type: req.body.fee_type,
-      refund_fee: req.body.refund_fee,
     };
-  } catch (error) {
-    return next(error);
-  }
+    console.log("requestBody: ", requestBody_query);
+    try {
+  
+      var response_query = await sdk.gateway_order_query(requestBody_query);
+      console.log("response_query: ", response_query);
+      // var ksher_order_no = response_query.data.ksher_order_no;
+      if (response_query.data.result == "REFUND") {
+        // remove this if use partial refund
+        res.send("order have been refund!");
+      }
+      if (response_query.data.result != "SUCCESS") {
+        res.send("order don't paid, please make sure order have paid");
+      }
+  
+      const requestBody_refund = {
+        mch_order_no: response_query.data.pay_mch_order_no,
+        mch_refund_no: req.body.mch_refund_no,
+        total_fee: req.body.total_fee,
+        fee_type: req.body.fee_type,
+        refund_fee: req.body.refund_fee,
+      };
+  
+      await sdk.order_refund(requestBody_refund).then((response_refund) => {
+        console.log("--------------------");
+        console.log("body: ", response_refund);
+        res.send(response_refund);
+      });
+    } catch (error) {
+      return next(error);
+    }
+  } else if (req.body.ksher_order_no != ""){
+    try {
+      const requestBody_query = {
+        ksher_order_no: req.body.ksher_order_no,
+      };
+      console.log("requestBody: ", requestBody_query);
+    
+        var response_query = await sdk.order_query(requestBody_query);
+        console.log("response_query: ", response_query);
+        // var ksher_order_no = response_query.data.ksher_order_no;
+        if (response_query.data.result == "REFUND") {
+          // remove this if use partial refund
+          res.send("order have been refund!");
+        }
+        if (response_query.data.result != "SUCCESS") {
+          res.send("order don't paid, please make sure order have paid");
+        }
+  
+      const requestBody_refund = {
+        ksher_order_no: req.body.ksher_order_no,
+        mch_refund_no: req.body.mch_refund_no,
+        total_fee: req.body.total_fee,
+        fee_type: req.body.fee_type,
+        refund_fee: req.body.refund_fee,
+      };
+      console.log("requestBody: ", requestBody_refund);
 
-  try {
-    await sdk.order_refund(requestBody_refund).then((response_refund) => {
-      console.log("--------------------");
-      console.log("body: ", response_refund);
-      res.send(response_refund);
-    });
-  } catch (error) {
-    return next(error);
-  }
+      await sdk.order_refund(requestBody_refund).then((response_refund) => {
+        console.log("--------------------");
+        console.log("body: ", response_refund);
+        res.send(response_refund);
+      });
+    } catch (error) {
+      return next(error);
+    }
+  } 
+  
 });
 
 module.exports = router;

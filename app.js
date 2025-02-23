@@ -10,6 +10,7 @@ var apiRouter = require('./routes/api');
 var redirectRouter = require('./routes/redirect');
 var cscanbRouter = require('./routes/cscanb');
 var bscancRouter = require('./routes/bscanc');
+var wap_payRouter = require('./routes/wap_pay');
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use('/api', apiRouter);
 app.use('/redirect', redirectRouter);
 app.use('/cscanb', cscanbRouter);
 app.use('/bscanc', bscancRouter);
+app.use('/wap_pay', wap_payRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
