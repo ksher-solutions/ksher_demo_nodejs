@@ -22,10 +22,13 @@
         <input class="form-control" name="fee_type" type="text" required="true" value="THB" />
       </div>
       <div class="col-auto">
-        <label class="form-label" name="mch_order_no">mch_order_no (商户订单id)</label>
-        <input class="form-control" name="mch_order_no" type="text" required="true"
+        <label class="form-label" for="mch_order_no">mch_order_no (商户订单id)</label>
+        <input class="form-control" id="mch_order_no" name="mch_order_no" type="text" required
           placeholder="Please enter a unique mch_order_no (请输入唯一的商户订单id)" />
       </div>
+      <script>
+        document.getElementById('mch_order_no').value = Date.now();
+      </script>
       <div class="col-auto">
         <label class="form-label" name="product">product</label>
         <input class="form-control" name="product" type="text" value="Example" />
@@ -38,25 +41,31 @@
           <option value="airpay">airpay</option>
           <option value="truemoney">truemoney</option>
           <option value="promptpay">promptpay</option>
+          <option value="alipayplus">alipayplus</option>
         </select>
       </div>
       <div class="col-auto">
         <label class="form-label" name="device_id">device_id</label>
         <input class="form-control" name="device_id" type="text" value="Example device_id" placeholder="mch_code" />
-        <div class="col-auto">
-          <label class="form-label" name="notify_url">notify_url</label>
-          <input class="form-control" name="notify_url" type="url" placeholder="The url to be webhook API if order completed" />
-        </div>
-        <div class="col-auto">
-          <label class="form-label" name="attach">attach (备注信息)</label>
-          <input class="form-control" name="attach" placeholder="Note information is here" />
-        </div>
-        <div class="col-auto">
-          <button class="btn btn-primary" type="reset" value="Reset">
-            reset (重置)
-          </button>
-          <input class="btn btn-primary" type="submit" value="Submit">
-        </div>
+      </div>
+      <div class="col-auto">
+        <label class="form-label" for="notify_url">mch_notify_url</label>
+        <input class="form-control" id="notify_url" name="notify_url" type="url"
+          placeholder="The url to be webhook API if order completed" />
+      </div>
+      <script>
+        document.getElementById('notify_url').value = window.location.origin + "/api/notify_url";
+      </script>
+      <div class="col-auto">
+        <label class="form-label" name="attach">attach (备注信息)</label>
+        <input class="form-control" name="attach" placeholder="Note information is here" />
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-primary" type="reset" value="Reset">
+          reset (重置)
+        </button>
+        <input class="btn btn-primary" type="submit" value="Submit">
+      </div>
     </form>
   </div>
 

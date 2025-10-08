@@ -5,6 +5,7 @@ const config = require('./config')
 var router = express.Router();
 
 const sdk = new KsherPay(config.appid, config.privatekey)
+// sdk.ksherSignVersion = "V2";
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -27,7 +28,6 @@ router.all('/notify_url', bodyParser.text(), async function(req, res) {
 });
 
 router.all('/quick_pay', async function(req, res) {
-
   const body = req.body;
   console.log("body: ",body);
   
@@ -40,9 +40,8 @@ router.all('/quick_pay', async function(req, res) {
 });
 
 router.post('/native_pay', async function(req, res) {
-
   const body = req.body;
-  console.log("body: ",body);
+  // console.log("body: ",body);
   
   await sdk.native_pay(body)
     .then(response => {
@@ -55,7 +54,7 @@ router.post('/native_pay', async function(req, res) {
 router.all('/order_query', async function(req, res) {
 
   const body = req.body;
-  console.log("body: ",body);
+  // console.log("body: ",body);
   
   await sdk.order_query(body)
     .then(response => {
